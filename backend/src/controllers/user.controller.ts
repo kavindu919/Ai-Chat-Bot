@@ -63,7 +63,11 @@ export const userSignup = async (
     });
     return res
       .status(201)
-      .json({ message: "Sucsess add new user", id: user._id.toString() });
+      .json({
+        message: "Sucsess add new user",
+        name: user.name,
+        email: user.email,
+      });
   } catch (error) {
     console.log(error);
     //casue is use to send error message
@@ -116,7 +120,11 @@ export const userLogin = async (
     });
     return res
       .status(200)
-      .json({ message: "Succesfully login", id: user._id.toString() });
+      .json({
+        message: "Succesfully login",
+        name: user.name,
+        email: user.email,
+      });
   } catch (error) {
     console.log(error);
     //casue is use to send error message

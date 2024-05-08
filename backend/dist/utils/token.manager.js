@@ -8,4 +8,6 @@ export const createToken = (id, email, expiresIn) => {
     });
     return token;
 };
+//function for veryfy the token
+export const verifyToken = async (req, res, next) => { };
 //# sourceMappingURL=token.manager.js.map
