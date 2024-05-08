@@ -19,5 +19,21 @@ export const verifyToken = async (
   next: NextFunction
 ) => {
   const token = req.signedCookies[`${COOKIE_NAME}`];
-  console.log(token);
+  if (!token || token.trim() === "") {
+    return res.status(401).json({ message: "Token not recived" });
+  }
+  return new Promise<void>((reslove, reject) => {
+    //verify the token
+    return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
+      if (err) {
+        reject(err.message);
+        return res.status(401).json({ message: "Token expired" });
+      } else {
+        console.log("Token validation Successfull");
+        reslove();
+        res.locals.jwtData = success;
+        return next();
+      }
+    });
+  });
 };
